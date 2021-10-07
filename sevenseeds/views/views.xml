@@ -1,0 +1,64 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="sevenseeds.list">
+      <field name="name">sevenseeds list</field>
+      <field name="model">sevenseeds.sevenseeds</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="sevenseeds.player_action_window">
+      <field name="name">7 Seeds Players</field>
+      <field name="res_model">sevenseeds.player</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="sevenseeds.action_server">
+      <field name="name">sevenseeds server</field>
+      <field name="model_id" ref="model_sevenseeds_sevenseeds"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="7 Seeds" id="sevenseeds.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Game" id="sevenseeds.menu_1" parent="sevenseeds.menu_root"/>
+    <menuitem name="Game aux" id="sevenseeds.aux" parent="sevenseeds.menu_root"/>
+    <menuitem name="Clients" id="sevenseeds.clients" parent="sevenseeds.menu_root"/>
+
+
+    <!-- actions -->
+
+    <menuitem name="Players" id="sevenseeds.players_list" parent="sevenseeds.clients"
+              action="sevenseeds.player_action_window"/>
+    <!--
+    <menuitem name="Server to list" id="sevenseeds" parent="sevenseeds.menu_2"
+              action="sevenseeds.action_server"/>
+    -->
+
+  </data>
+</odoo>
