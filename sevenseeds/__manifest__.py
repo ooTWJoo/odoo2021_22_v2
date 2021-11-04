@@ -27,6 +27,11 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'demo/teams.xml',
+        'demo/areas.xml',
+        'demo/skills.xml',
+        'demo/jobs.xml',
+        'demo/weapons.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

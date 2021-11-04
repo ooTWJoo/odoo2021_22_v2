@@ -22,6 +22,46 @@
       <field name="res_model">sevenseeds.player</field>
       <field name="view_mode">tree,form</field>
     </record>
+    <record model="ir.actions.act_window" id="sevenseeds.character_action_window">
+      <field name="name">Characters</field>
+      <field name="res_model">sevenseeds.character</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="sevenseeds.team_action_window">
+      <field name="name">Teams</field>
+      <field name="res_model">sevenseeds.team</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="sevenseeds.area_action_window">
+      <field name="name">Areas</field>
+      <field name="res_model">sevenseeds.area</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="sevenseeds.skill_action_window">
+      <field name="name">Skills</field>
+      <field name="res_model">sevenseeds.skill</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="sevenseeds.job_action_window">
+      <field name="name">Jobs</field>
+      <field name="res_model">sevenseeds.job</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="sevenseeds.weapon_action_window">
+      <field name="name">Weapons</field>
+      <field name="res_model">sevenseeds.weapon</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="sevenseeds.pet_action_window">
+      <field name="name">Pets</field>
+      <field name="res_model">sevenseeds.pet</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="sevenseeds.base_action_window">
+      <field name="name">Base</field>
+      <field name="res_model">sevenseeds.base</field>
+      <field name="view_mode">tree,form</field>
+    </record>
 
 
     <!-- server action to the one above -->
@@ -55,6 +95,22 @@
 
     <menuitem name="Players" id="sevenseeds.players_list" parent="sevenseeds.clients"
               action="sevenseeds.player_action_window"/>
+    <menuitem name="Characters" id="sevenseeds.characters_list" parent="sevenseeds.clients"
+              action="sevenseeds.character_action_window"/>
+    <menuitem name="Teams" id="sevenseeds.teams_list" parent="sevenseeds.clients"
+              action="sevenseeds.team_action_window"/>
+    <menuitem name="Areas" id="sevenseeds.areas_list" parent="sevenseeds.clients"
+              action="sevenseeds.area_action_window"/>
+    <menuitem name="Skills" id="sevenseeds.skills_list" parent="sevenseeds.clients"
+              action="sevenseeds.skill_action_window"/>
+    <menuitem name="Jobs" id="sevenseeds.jobs_list" parent="sevenseeds.clients"
+              action="sevenseeds.job_action_window"/>
+    <menuitem name="Weapons" id="sevenseeds.weapon_list" parent="sevenseeds.clients"
+              action="sevenseeds.weapon_action_window"/>
+    <menuitem name="Pets" id="sevenseeds.pets_list" parent="sevenseeds.clients"
+              action="sevenseeds.pet_action_window"/>
+    <menuitem name="Bases" id="sevenseeds.bases_list" parent="sevenseeds.clients"
+              action="sevenseeds.base_action_window"/>
     <!--
     <menuitem name="Server to list" id="sevenseeds" parent="sevenseeds.menu_2"
               action="sevenseeds.action_server"/>

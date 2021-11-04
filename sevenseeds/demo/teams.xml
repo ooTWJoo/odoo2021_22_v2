@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+          <record id="sevenseeds.t_spring" model="sevenseeds.team">
+            <field name="name">Spring</field>
+          </record>
+        <record id="sevenseeds.t_summer_a" model="sevenseeds.team">
+            <field name="name">Summer A</field>
+          </record>
+        <record id="sevenseeds.t_summer_b" model="sevenseeds.team">
+            <field name="name">Summer B</field>
+          </record>
+        <record id="sevenseeds.t_autumn" model="sevenseeds.team">
+            <field name="name">Autumn</field>
+          </record>
+        <record id="sevenseeds.t_winter" model="sevenseeds.team">
+            <field name="name">Winter</field>
+          </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+          <record id="sevenseeds.a_paradise" model="sevenseeds.area">
+            <field name="name">Paradise Point</field>
+          </record>
+        <record id="sevenseeds.a_slums" model="sevenseeds.area">
+            <field name="name">Sickly Slums</field>
+          </record>
+        <record id="sevenseeds.a_greenland" model="sevenseeds.area">
+            <field name="name">Great Greenland</field>
+          </record>
+        <record id="sevenseeds.a_ocean" model="sevenseeds.area">
+            <field name="name">Obscene Oceans</field>
+          </record>
+        <record id="sevenseeds.a_iceage" model="sevenseeds.area">
+            <field name="name">Irreplaceable Iceage</field>
+          </record>
+        <record id="sevenseeds.a_caves" model="sevenseeds.area">
+            <field name="name">Cosey Caves</field>
+          </record>
+        <record id="sevenseeds.a_forest" model="sevenseeds.area">
+            <field name="name">Foamy Forest</field>
+          </record>
+
+    </data>
+</odoo>

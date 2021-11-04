@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+          <record id="sevenseeds.s_speedboost" model="sevenseeds.skill">
+            <field name="name">Fast as Heck</field>
+          </record>
+        <record id="sevenseeds.s_animalwhisper" model="sevenseeds.skill">
+            <field name="name">Animal Whisperer</field>
+          </record>
+        <record id="sevenseeds.s_topchef" model="sevenseeds.skill">
+            <field name="name">Top Chef</field>
+          </record>
+        <record id="sevenseeds.s_deadeye" model="sevenseeds.skill">
+            <field name="name">Deadeye</field>
+          </record>
+        <record id="sevenseeds.s_weakpoint" model="sevenseeds.skill">
+            <field name="name">Weakpoint Spotter</field>
+          </record>
+        <record id="sevenseeds.s_sprout" model="sevenseeds.skill">
+            <field name="name">Sprouter</field>
+          </record>
+        <record id="sevenseeds.s_hints" model="sevenseeds.skill">
+            <field name="name">Hint Merchant</field>
+          </record>
+        <record id="sevenseeds.s_strengthboost" model="sevenseeds.skill">
+            <field name="name">Built Like a Brick</field>
+          </record>
+        <record id="sevenseeds.s_miningboost" model="sevenseeds.skill">
+            <field name="name">Ore Spotter</field>
+          </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+          <record id="sevenseeds.w_bow" model="sevenseeds.weapon">
+            <field name="name">Bow</field>
+          </record>
+        <record id="sevenseeds.w_spear" model="sevenseeds.weapon">
+            <field name="name">Spear</field>
+          </record>
+        <record id="sevenseeds.w_axe" model="sevenseeds.weapon">
+            <field name="name">Axe</field>
+          </record>
+        <record id="sevenseeds.w_hoe" model="sevenseeds.weapon">
+            <field name="name">Hoe</field>
+          </record>
+        <record id="sevenseeds.w_pickaxe" model="sevenseeds.weapon">
+            <field name="name">Pickaxe</field>
+          </record>
+        <record id="sevenseeds.w_slingshot" model="sevenseeds.weapon">
+            <field name="name">Slingshot</field>
+          </record>
+        <record id="sevenseeds.w_knife" model="sevenseeds.weapon">
+            <field name="name">Knife</field>
+          </record>
+
+    </data>
+</odoo>

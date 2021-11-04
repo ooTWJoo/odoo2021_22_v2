@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+          <record id="sevenseeds.j_miner" model="sevenseeds.job">
+            <field name="name">Miner</field>
+          </record>
+        <record id="sevenseeds.j_explorer" model="sevenseeds.job">
+            <field name="name">Explorer</field>
+          </record>
+        <record id="sevenseeds.j_gardener" model="sevenseeds.job">
+            <field name="name">Gardener</field>
+          </record>
+        <record id="sevenseeds.j_instructor" model="sevenseeds.job">
+            <field name="name">Instructor</field>
+          </record>
+        <record id="sevenseeds.j_chef" model="sevenseeds.job">
+            <field name="name">Chef</field>
+          </record>
+        <record id="sevenseeds.j_hunter" model="sevenseeds.job">
+            <field name="name">Hunter</field>
+          </record>
+        <record id="sevenseeds.j_lumberjack" model="sevenseeds.job">
+            <field name="name">Lumberjack</field>
+          </record>
+
+    </data>
+</odoo>
