@@ -86,8 +86,7 @@
 
     <!-- menu categories -->
 
-    <menuitem name="Game" id="sevenseeds.menu_1" parent="sevenseeds.menu_root"/>
-    <menuitem name="Game aux" id="sevenseeds.aux" parent="sevenseeds.menu_root"/>
+    <menuitem name="Game" id="sevenseeds.game" parent="sevenseeds.menu_root"/>
     <menuitem name="Clients" id="sevenseeds.clients" parent="sevenseeds.menu_root"/>
 
 
@@ -95,21 +94,21 @@
 
     <menuitem name="Players" id="sevenseeds.players_list" parent="sevenseeds.clients"
               action="sevenseeds.player_action_window"/>
-    <menuitem name="Characters" id="sevenseeds.characters_list" parent="sevenseeds.clients"
+    <menuitem name="Characters" id="sevenseeds.characters_list" parent="sevenseeds.game"
               action="sevenseeds.character_action_window"/>
-    <menuitem name="Teams" id="sevenseeds.teams_list" parent="sevenseeds.clients"
+    <menuitem name="Teams" id="sevenseeds.teams_list" parent="sevenseeds.game"
               action="sevenseeds.team_action_window"/>
-    <menuitem name="Areas" id="sevenseeds.areas_list" parent="sevenseeds.clients"
+    <menuitem name="Areas" id="sevenseeds.areas_list" parent="sevenseeds.game"
               action="sevenseeds.area_action_window"/>
-    <menuitem name="Skills" id="sevenseeds.skills_list" parent="sevenseeds.clients"
+    <menuitem name="Skills" id="sevenseeds.skills_list" parent="sevenseeds.game"
               action="sevenseeds.skill_action_window"/>
-    <menuitem name="Jobs" id="sevenseeds.jobs_list" parent="sevenseeds.clients"
+    <menuitem name="Jobs" id="sevenseeds.jobs_list" parent="sevenseeds.game"
               action="sevenseeds.job_action_window"/>
-    <menuitem name="Weapons" id="sevenseeds.weapon_list" parent="sevenseeds.clients"
+    <menuitem name="Weapons" id="sevenseeds.weapon_list" parent="sevenseeds.game"
               action="sevenseeds.weapon_action_window"/>
-    <menuitem name="Pets" id="sevenseeds.pets_list" parent="sevenseeds.clients"
+    <menuitem name="Pets" id="sevenseeds.pets_list" parent="sevenseeds.game"
               action="sevenseeds.pet_action_window"/>
-    <menuitem name="Bases" id="sevenseeds.bases_list" parent="sevenseeds.clients"
+    <menuitem name="Bases" id="sevenseeds.bases_list" parent="sevenseeds.game"
               action="sevenseeds.base_action_window"/>
     <!--
     <menuitem name="Server to list" id="sevenseeds" parent="sevenseeds.menu_2"

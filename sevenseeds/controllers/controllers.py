@@ -8,7 +8,7 @@ class banner_controller_sevenseeds(http.Controller):
     def banner(self):
         return{
             'html': """
-                <div class="sevenseeds_banner" style="height: 200px; background-size: 100%; background-image: url(/sevenseeds/static/src/img/sevenSeeds.png)">
+                <div class="sevenseeds_banner" style="height: 200px; background-size: 100%; background-image: url(/sevenseeds/static/src/img/sevenSeeds.jpg)">
                 </div> """
         }
 # class Sevenseeds(http.Controller):

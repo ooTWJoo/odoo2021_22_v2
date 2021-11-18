@@ -8,3 +8,4 @@ access_sevenseeds_job,sevenseeds.job,model_sevenseeds_job,base.group_user,1,1,1,
 access_sevenseeds_weapon,sevenseeds.weapon,model_sevenseeds_weapon,base.group_user,1,1,1,1
 access_sevenseeds_pet,sevenseeds.pet,model_sevenseeds_pet,base.group_user,1,1,1,1
 access_sevenseeds_base,sevenseeds.base,model_sevenseeds_base,base.group_user,1,1,1,1
+access_sevenseeds_character_template,sevenseeds.character_template,model_sevenseeds_character_template,base.group_user,1,1,1,1

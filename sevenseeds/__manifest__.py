@@ -26,12 +26,14 @@
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
-        'views/templates.xml',
+        'views/player.xml',
+        'views/characters.xml',
         'demo/teams.xml',
         'demo/areas.xml',
         'demo/skills.xml',
         'demo/jobs.xml',
         'demo/weapons.xml',
+        'demo/character_templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
