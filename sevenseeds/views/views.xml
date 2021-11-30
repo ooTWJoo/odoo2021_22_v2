@@ -25,7 +25,7 @@
     <record model="ir.actions.act_window" id="sevenseeds.character_action_window">
       <field name="name">Characters</field>
       <field name="res_model">sevenseeds.character</field>
-      <field name="view_mode">tree,form,kanban</field>
+      <field name="view_mode">kanban,tree,form</field>
     </record>
     <record model="ir.actions.act_window" id="sevenseeds.team_action_window">
       <field name="name">Teams</field>

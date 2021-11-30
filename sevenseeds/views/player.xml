@@ -24,21 +24,52 @@
                         <group>
                             <field name="avatar" widget="image" />
                             <field name="name" />
-                            <field name="quantity_characters" />
-                            <field name="characters">
-                                <tree>
+                        </group>
+                        <notebook>
+                                <page name="characters" string="Characters"></page>
+                                <group>
+                                    <field name="quantity_characters" />
+                                </group>
+                            <field name="characters" mode="kanban">
+                                <kanban>
+                                    <field name="id"/>
                                     <field name="name" />
-
-
                                     <field name="mood" />
                                     <field name="illness" />
                                     <field name="area" />
                                     <field name="base" widget="many2many_tags" />
-                                </tree>
+                                     <templates>
+                                            <t t-name="kanban-box">
+
+                                                <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                                                    <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block sevenseeds_img_kanban"
+                                                         t-attf-style="background-image:url('#{kanban_image('sevenseeds.character', 'avatar', record.id.value, placeholder)}')">
+                                                    </div>
+
+
+                                                    <div class="oe_kanban_details d-flex flex-column">
+                                                        <a type="open"><h4
+                                                                class="o_kanban_record_title oe_partner_heading"><field
+                                                                name="name"/></h4></a>
+                                                        <ul>
+                                                            <li>Mood: <field name="mood"/></li>
+                                                            <li>Illness: <field name="illness"/></li>
+                                                            <li>Area: <field name="area"/></li>
+                                                            <li>Bases: <field name="base"/></li>
+                                                        </ul>
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </t>
+                                        </templates>
+                                </kanban>
                             </field>
 
-                        </group>
-                        <button name="create_character" type="object" string="Create Character" class="oe_highlight" />
+
+                        </notebook>
                     </sheet>
                 </form>
             </field>
