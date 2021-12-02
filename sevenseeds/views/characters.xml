@@ -66,8 +66,9 @@
 
 
                                     <div class="oe_kanban_details d-flex flex-column">
-                                        <a type="open"><h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
-                                        <ul>
+                                        <a type="open"><h4 class="o_kanban_record_title oe_partner_heading"><field name="id"/></h4></a>
+                                        <ul><li>Name: <field name="name"/></li>
+                                            <li>Sex: <field name="sex"/></li>
                                             <li>Mood: <field name="mood"/></li>
                                             <li>Illness: <field name="illness"/></li>
                                             <li>Area: <field name="area"/></li>
