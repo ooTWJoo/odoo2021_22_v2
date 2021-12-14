@@ -14,6 +14,8 @@ class player(models.Model):
      avatar_icon = fields.Image(related='avatar', max_width=50, max_height=50)
      characters = fields.One2many('sevenseeds.character', 'player')
      quantity_characters = fields.Integer(compute='_get_q_characters')
+     login = fields.Char()
+     password = fields.Char()
 
      @api.depends('characters')
      def _get_q_characters(self):
@@ -22,9 +24,10 @@ class player(models.Model):
 
      def create_character(self):
           for p in self:
+               sex = random.choice(['male', 'female'])
                template = random.choice(self.env['sevenseeds.character_template'].search([]).mapped(lambda t: t.id))
-               area = random.choice(self.env['area.city'].search([]).mapped(lambda t: t.id))
-               self.env['sevenseeds.character'].create({'player': p.id, 'template': template, 'area': area})
+               area = random.choice(self.env['sevenseeds.area'].search([]).mapped(lambda t: t.id))
+               self.env['sevenseeds.character'].create({'player': p.id, 'sex': sex,  'template': template, 'area': area})
 
 
 class team(models.Model):

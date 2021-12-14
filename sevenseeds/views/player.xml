@@ -20,13 +20,18 @@
             <field name="model">sevenseeds.player</field>
             <field name="arch" type="xml">
                 <form>
+                        <header>
+                            <button name="create_character" type="object" string="Create A Character" class="oe_highlight"/>
+                        </header>
                     <sheet>
                         <group>
                             <field name="avatar" widget="image" />
-                            <field name="name" />
+                            <field name="name"/>
+                            <field name="login"/>
+                            <field name="password" password="True"/>
                         </group>
                         <notebook>
-                                <page name="characters" string="Characters"></page>
+                                <page name="characters" string="Characters">
                                 <group>
                                     <field name="quantity_characters" />
                                 </group>
@@ -67,6 +72,7 @@
                                         </templates>
                                 </kanban>
                             </field>
+                        </page>
 
 
                         </notebook>
