@@ -237,7 +237,7 @@ class journey(models.Model):
     def launch_travel(self):
         for j in self:
             j.date_start = fields.datetime.now()
-            j.state = 'inprogess'
+            j.state = 'inprogress'
             for p in j.passengers:
                 p.area = False
 
