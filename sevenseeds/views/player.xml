@@ -15,6 +15,42 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="sevenseeds.player_kanban">
+            <field name="name">7Seeds player kanban</field>
+            <field name="model">sevenseeds.player</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="id" />
+                    <field name="name"/>
+                    <field name="login"/>
+                    <field name="team"/>
+                    <templates>
+                        <t t-name="kanban-box">
+
+                            <div t-attf-class="oe_kanban_color_{{kanban_getcolor(record.team.raw_value)}} oe_kanban_card o_kanban_record_has_image_fill ">
+                                <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block sevenseeds_img_kanban"
+                                     t-attf-style="background-image:url('#{kanban_image('sevenseeds.player', 'avatar', record.id.value, placeholder)}')">
+                                </div>
+
+
+                                    <div class="oe_kanban_details d-flex flex-column">
+                                        <a type="open"><h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                                        <ul>
+                                            <li>Id: <field name="id"/></li>
+                                            <li>Login: <field name="login"/></li>
+                                            <li>Team: <field name="team"/></li>
+                                        </ul>
+                                    </div>
+
+                            </div>
+
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="sevenseeds.player_form">
             <field name="name">7Seeds player form</field>
             <field name="model">sevenseeds.player</field>
@@ -24,11 +60,18 @@
                             <button name="create_character" type="object" string="Create A Character" class="oe_highlight"/>
                         </header>
                     <sheet>
+                        <separator string="User Info"></separator>
                         <group>
-                            <field name="avatar" widget="image" />
-                            <field name="name"/>
-                            <field name="login"/>
-                            <field name="password" password="True"/>
+                            <group>
+
+                                <field name="avatar" widget="image" />
+                            </group>
+                            <group>
+                                <field name="name"/>
+                                <field name="login"/>
+                                <field name="password" password="True"/>
+                                <field name="team"/>
+                            </group>
                         </group>
                         <notebook>
                                 <page name="characters" string="Characters">

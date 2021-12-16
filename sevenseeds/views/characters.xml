@@ -6,15 +6,25 @@
       <field name="name">7Seeds character tree</field>
       <field name="model">sevenseeds.character</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="name" />
+          <tree decoration-danger="illness>40">
+              <field name="name" />
 
 
-          <field name="mood" />
-          <field name="illness" />
-          <field name="area" />
-          <field name="base" widget="many2many_tags" />
+              <field name="mood" />
+              <field name="illness" widget="progressbar"/>
+              <field name="area" />
+              <field name="base" widget="many2many_tags" />
         </tree>
+      </field>
+    </record>
+
+      <record model="ir.ui.view" id="sevenseeds.character_graph">
+      <field name="name">7Seeds character graph</field>
+      <field name="model">sevenseeds.character</field>
+      <field name="arch" type="xml">
+          <graph string="Sex Graph">
+              <field name="sex"/>
+        </graph>
       </field>
     </record>
 
@@ -23,21 +33,46 @@
       <field name="model">sevenseeds.character</field>
       <field name="arch" type="xml">
         <form>
+            <header>
+                <button name="btn_draft" string="Draft" class="oe_highlight" states="confirm, cancel" type="object"/>
+                <button name="btn_confirm" string="Confirm" class="oe_highlight" states="draft" type="object"/>
+                <field name="state" widget="statusbar"/>
+            </header>
           <sheet>
+              <separator string="Character Info"></separator>
             <field name="avatar" widget="image"/>
+              <group>
             <group>
               <field name="sex"/>
               <field name="name"/>
               <field name="mood" />
-              <field name="illness" />
+                </group>
+              <group>
               <field name="area" />
               <field name="player" />
               <field name="template" />
             </group>
+              </group>
+              <group>
+              <field name="illness" widget="percentpie"/>
+                  </group>
             <notebook>
               <page name="base" string="Bases">
-                <field name="base" />
+                <field name="base">
+                  <tree>
+                      <field name="name"/>
+                      <field name="area"/>
+                  </tree>
+                  </field>
               </page>
+                <page name="pet" string="Pets">
+                    <field name="pet">
+                    <tree>
+                      <field name="name"/>
+                      <field name="type"/>
+                  </tree>
+                    </field>
+                </page>
             </notebook>
           </sheet>
         </form>
@@ -53,26 +88,27 @@
                     <field name="sex"/>
                     <field name="name"/>
                     <field name="mood" />
-                    <field name="illness" />
+                    <field name="illness" widget="gauge"/>
                     <field name="area" />
                     <field name="player" />
                     <templates>
                         <t t-name="kanban-box">
 
-                            <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                            <div t-attf-class="oe_kanban_color_{{kanban_getcolor(record.sex.raw_value)}} oe_kanban_card o_kanban_record_has_image_fill ">
                                 <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block sevenseeds_img_kanban"
                                      t-attf-style="background-image:url('#{kanban_image('sevenseeds.character', 'avatar', record.id.value, placeholder)}')">
                                 </div>
 
 
                                     <div class="oe_kanban_details d-flex flex-column">
-                                        <a type="open"><h4 class="o_kanban_record_title oe_partner_heading"><field name="id"/></h4></a>
-                                        <ul><li>Name: <field name="name"/></li>
+                                        <a type="open"><h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                                        <ul>
                                             <li>Sex: <field name="sex"/></li>
                                             <li>Mood: <field name="mood"/></li>
-                                            <li>Illness: <field name="illness"/></li>
                                             <li>Area: <field name="area"/></li>
                                             <li>Player: <field name="player"/></li>
+                                            <li></li>
+                                            <li>Illness: <field name="illness" widget="gauge"/></li>
 
                                         </ul>
                                     </div>
@@ -85,6 +121,19 @@
                 </kanban>
             </field>
         </record>
+      <record model="ir.ui.view" id="sevenseeds.character_search">
+      <field name="name">7Seeds character search</field>
+      <field name="model">sevenseeds.character</field>
+      <field name="arch" type="xml">
+          <search>
+              <field name="name" />
+              <field name="mood" />
+              <field name="illness" string="Illness Over" filter_domain="[('illness','>=',self)]"/>
+              <filter name="healthy" string="Healthy Characters" domain="[('illness','&lt;=',40)]"></filter>
+              <filter name="group_by_area" string="Group By Area" context="{'group_by': 'area'}"></filter>
+        </search>
+      </field>
+    </record>
 
   </data>
 </odoo>

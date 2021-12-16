@@ -20,12 +20,12 @@
     <record model="ir.actions.act_window" id="sevenseeds.player_action_window">
       <field name="name">7 Seeds Players</field>
       <field name="res_model">sevenseeds.player</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,kanban</field>
     </record>
     <record model="ir.actions.act_window" id="sevenseeds.character_action_window">
       <field name="name">Characters</field>
       <field name="res_model">sevenseeds.character</field>
-      <field name="view_mode">kanban,tree,form</field>
+      <field name="view_mode">kanban,tree,form,graph,search</field>
     </record>
     <record model="ir.actions.act_window" id="sevenseeds.team_action_window">
       <field name="name">Teams</field>

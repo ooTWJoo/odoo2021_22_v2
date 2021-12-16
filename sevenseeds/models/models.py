@@ -25,9 +25,30 @@ class player(models.Model):
      def create_character(self):
           for p in self:
                sex = random.choice(['male', 'female'])
-               template = random.choice(self.env['sevenseeds.character_template'].search([]).mapped(lambda t: t.id))
+               if sex == 'male':
+                    first = ["Kenny", "Matt", "Nick", "Adam", "Brandon", "Luke", "Karl", "Micheal", "Tama", "Tanga",
+                             "AJ", "Finn", "Jay", "Marty", "Chris", "Sammy", "Jake", "Santana", "Ortiz", "Darby",
+                             "Maxwell J.", "Jungle", "Evil", "Stu", "Colt", "John", "Alex", "Ten", "Alan V", "Brodie"]
+                    second = ["Omega", "Jackson", "Page", "Cole", "Cutler", "Gallows", "Anderson", "Nakazawa",
+                              "Tonga", "Loa", "Styles", "Bálor", "White", "Scurll", "Jericho", "Guevara", "Hager",
+                              "Proud", "Powerful", "Allin", "Friedman", "Boy", "Uno", "Grayson", "Cabana", "Silver",
+                              "Reynolds", "Ten", "Angels", "Lee", "Smegg"]
+
+                    name = random.choice(first) + " " + random.choice(second)
+                    template = random.choice(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
+               elif sex == 'female':
+                    first = ["Kris", "AJ", "Anna", "Jade", "The", "Penelope", "Hikaru", "Ruby", "Charlotte", "Paige",
+                             "Julia", "Alexa", "Brandi", "Britt", "Jamie", "Abadon", "Leva", "Leyla", "Nyla", "Serena",
+                             "Tay", "Thunder", "Sasha", "Bayley", "Becky", "Nia", "Ember", "Eva", "Torrie", "Stephanie"]
+                    second = ["Statlander", "Lee", "Jay", "Cargill", "Bunny", "Ford", "Shida", "Soho", "Flair", "Stars",
+                              "Hart", "Bliss", "Rhodes", "Baker", "Hayter", "Mass", "Bates", "Hersch", "Rose", "Deeb",
+                              "Conti", "Rosa", "Banks", "Ivelisse", "Lynch", "Jax", "Moon", "Marie", "Wilson",
+                              "McMahon"]
+                    name = random.choice(first) + " " + random.choice(second)
+                    template = random.choice(['10','11', '12', '13', '14', '15', '16', '17', '18', '19'])
+
                area = random.choice(self.env['sevenseeds.area'].search([]).mapped(lambda t: t.id))
-               self.env['sevenseeds.character'].create({'player': p.id, 'sex': sex,  'template': template, 'area': area})
+               self.env['sevenseeds.character'].create({'player': p.id, 'sex': sex, 'name': name, 'template': template, 'area': area})
 
 
 class team(models.Model):
@@ -41,11 +62,14 @@ class character(models.Model):
      _name = 'sevenseeds.character'
      _description = 'Character'
 
-     sex = fields.Selection([('male', 'Male'), ('female', 'Female')])
+     sex = fields.Selection([('male', 'Male'), ('female', 'Female')], required=True)
+
+     def _generate_illness(self):
+          return round((random.random())*100)
 
      name = fields.Char()
      mood = fields.Float(default = 70.00)
-     illness = fields.Float(default = 1.00)
+     illness = fields.Float(default = _generate_illness)
      player = fields.Many2one('sevenseeds.player', ondelete='set null')
      area = fields.Many2one('sevenseeds.area', ondelete='restrict')
      job = fields.Many2one('sevenseeds.job', ondelete='set null')
@@ -55,6 +79,13 @@ class character(models.Model):
      pet = fields.One2many('sevenseeds.pet', 'character')
      template = fields.Many2one('sevenseeds.character_template', ondelete='restrict')
      avatar = fields.Image(max_width=200, max_height=400, related='template.image')
+     state = fields.Selection(string="state", selection=[('draft', 'Draft'), ('confirm', 'Confirmed')], required=False, default="draft")
+
+     def btn_draft(self):
+          self.state="draft"
+
+     def btn_confirm(self):
+          self.state = "confirm"
 
      @api.constrains('skill')
      def _check_something(self):
@@ -130,7 +161,7 @@ class pet(models.Model):
      _description = 'Pet'
 
      name = fields.Char()
-     health = fields.Float(defualt=100.00)
+     health = fields.Float(default=99.00)
      type = fields.Selection([('dog', 'Dog'), ('cat', 'Cat'), ('bird', 'Bird'), ('horse', 'Horse'),
                               ('fox', 'Fox'), ('monkey', 'Monkey')])
      character = fields.Many2one('sevenseeds.character', ondelete='set null')
