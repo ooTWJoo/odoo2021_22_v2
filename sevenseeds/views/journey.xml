@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="sevenseeds.journey_tree">
+            <field name="name">7Seeds journey Tree</field>
+            <field name="model">sevenseeds.journey</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="origin" />
+                    <field name="destination" />
+                    <field name="routes" />
+                    <field name="date_start" />
+                    <field name="date_finish" />
+                    <field name="status" widget="progressbar"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sevenseeds.journey_form">
+            <field name="name">7Seeds journey form</field>
+            <field name="model">sevenseeds.journey</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="name"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="origin" />
+                                <field name="destination" attrs="{'readonly':[('origin', '=', False)]}"/>
+                                <field name="routes" />
+                                <field name="player" attrs="{'readonly':[('origin', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="date_start" />
+                                <field name="date_finish" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="passenger" string="passengers">
+                                <field name="passengers" />
+                            </page>
+                        </notebook>
+                        <button name="launch_travel" type="object" string="Start Journey" class="oe_highlight"/>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sevenseeds.journey_calendar">
+            <field name="name">7Seeds journey Calendar</field>
+            <field name="model">sevenseeds.journey</field>
+            <field name="arch" type="xml">
+                <calendar date_start="date_start" date_stop="date_finish">
+                    <field name="name" />
+                    <field name="origin" />
+                    <field name="destination" />
+                    <field name="routes" />
+                    <field name="status" widget="progressbar"/>
+
+                </calendar>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

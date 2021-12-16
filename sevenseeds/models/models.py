@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import random
+import math
 
 from odoo.exceptions import ValidationError
 from odoo import models, fields, api
+from datetime import timedelta, datetime
 
 class player(models.Model):
      _name = 'sevenseeds.player'
@@ -125,15 +127,28 @@ class area(models.Model):
      _name = 'sevenseeds.area'
      _description = 'Area'
 
+     def _generate_position(self):
+        existent_areas = self.search([])
+        x = random.randint(-100, 100)
+        for e in existent_areas:
+            if e.position_x != x:
+                return x
+
      name = fields.Char()
      energy = fields.Float()
      food = fields.Float()
      water = fields.Float()
      livability = fields.Float(default=50.00)  # %
-     happiness = fields.Float(default=50.00)  # %
-
+     happiness = fields.Float(default=50.00)# %
+     routes = fields.Many2many("sevenseeds.route", compute='_get_routes')
      character = fields.One2many('sevenseeds.character', 'area')
      base = fields.One2many('sevenseeds.base', 'area')
+     position_x = fields.Integer(default=_generate_position)
+     position_y = fields.Integer(default=_generate_position)
+
+     def _get_routes(self):
+         for a in self:
+             a.routes=self.env['sevenseeds.route'].search(['|', ('area_1', '=', a.id), ('area_2', '=', a.id)]).ids
 
 class skill(models.Model):
      _name = 'sevenseeds.skill'
@@ -175,6 +190,107 @@ class base(models.Model):
      condition = fields.Float(default=50.00) # 0 is new, 100 is bRoKeN
      character = fields.Many2one('sevenseeds.character', ondelete='set null')
      area = fields.Many2one('sevenseeds.area', ondelete='set null')
+
+class route(models.Model):
+    _name = 'sevenseeds.route'
+    _description = 'Route'
+
+    name = fields.Char(compute='_set_name')
+    area_1 = fields.Many2one('sevenseeds.area', ondelete='cascade')
+    area_2 = fields.Many2one('sevenseeds.area', ondelete='cascade')
+    distance = fields.Float(compute='_generate_distance')
+
+    @api.depends('area_1', 'area_2')
+    def _generate_distance(self):
+        for r in self:
+            r.distance = math.sqrt((r.area_1.position_x - r.area_1.position_x)** 2 + (r.area_2.position_x - r.area_2.position_y)** 2)
+
+    @api.onchange('distance')
+    def _set_name(self):
+        for r in self:
+            r.name = r.area_1.name, " ---- ", r.area_2.name
+
+class journey(models.Model):
+    _name = 'sevenseeds.journey'
+    _description = 'Journey'
+
+    name = fields.Char(default='Journey')
+    origin = fields.Many2one('sevenseeds.area', ondelete='cascade')
+    destination = fields.Many2one('sevenseeds.area', ondelete='cascade')
+    routes = fields.Many2one('sevenseeds.route', ondelete='cascade')
+    date_start = fields.Datetime(default=lambda r: fields.datetime.now())
+    date_finish = fields.Datetime(compute='_get_status')
+    status = fields.Float(compute='_get_status')
+    state = fields.Selection([('preparing', 'Preparing'), ('inprogress', 'In Progress'), ('finished', 'Finished')],
+                             default='preparing')
+
+    player = fields.Many2one('sevenseeds.player')
+    passengers = fields.Many2many('sevenseeds.character')
+
+    @api.onchange('destination')
+    def _onchange_destination(self):
+        if self.destination != False:
+            routes_available = self.origin.routes & self.destination.routes
+            self.routes = routes_available.id
+            return {}
+
+    def launch_travel(self):
+        for j in self:
+            j.date_start = fields.datetime.now()
+            j.state = 'inprogess'
+            for p in j.passengers:
+                p.area = False
+
+    @api.depends('date_start', 'routes')
+    def _get_status(self):
+        for j in self:
+            if j.routes:
+                print(j.routes.distance)
+                if j.date_start:
+                    d_start = j.date_start
+                    date = fields.Datetime.from_string(d_start)
+                    date = date + timedelta(hours=j.routes.distance)
+                    j.date_finish = fields.Datetime.to_string(date)
+                    time_left = fields.Datetime.context_timestamp(self, j.date_finish)-fields.Datetime.context_timestamp(self, datetime.now())
+                    time_left = time_left.total_seconds() / 60 / 60
+                    j.status = (1 - time_left / j.routes.distance) * 100
+                    if j.status >= 100:
+                        j.status = 100
+                else:
+                    j.status = 0;
+                    j.date_finish = False
+            else:
+                j.status = 0
+                j.date_finish = False
+
+    @api.model
+    def update_travel(self):
+        journeys_in_progress = self.search([('state', '=', 'inprogress')])
+        print("Updating progress in: ", journeys_in_progress)
+        for j in journeys_in_progress:
+            if j.status >= 100:
+                j.write({'state': 'finished'})
+                for p in j.passengers:
+                    p.write({'area': j.destination.id})
+                self.env['sevenseeds.event'].create(
+                    {'name': 'Journey arrival ' + j.name, 'player': j.player, 'event': 'sevenseeds.journey,' + str(j.id), 'description': 'Journey arrival... '})
+                print('Arrival')
+
+
+class event(models.Model):
+    _name = 'sevenseeds.event'
+    _description = 'Events'
+
+    name = fields.Char()
+    player = fields.Many2many('res.partner')
+    event = fields.Reference([('sevenseeds.journey', 'Journey')])
+    description = fields.Text()
+
+
+
+
+
+
 
 
 

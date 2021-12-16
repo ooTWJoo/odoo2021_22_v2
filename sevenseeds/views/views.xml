@@ -21,6 +21,7 @@
       <field name="name">7 Seeds Players</field>
       <field name="res_model">sevenseeds.player</field>
       <field name="view_mode">tree,form,kanban</field>
+      <field name="context">{'default_name': 'New Player'}</field>
     </record>
     <record model="ir.actions.act_window" id="sevenseeds.character_action_window">
       <field name="name">Characters</field>
@@ -62,6 +63,22 @@
       <field name="res_model">sevenseeds.base</field>
       <field name="view_mode">tree,form</field>
     </record>
+    <record model="ir.actions.act_window" id="sevenseeds.route_action_window">
+      <field name="name">Route</field>
+      <field name="res_model">sevenseeds.route</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="sevenseeds.journey_action_window">
+      <field name="name">Journey</field>
+      <field name="res_model">sevenseeds.journey</field>
+      <field name="view_mode">tree,form,calendar</field>
+    </record>
+    <record model="ir.actions.act_window" id="sevenseeds.events_action_window">
+      <field name="name">Events</field>
+      <field name="res_model">sevenseeds.event</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
 
 
     <!-- server action to the one above -->
@@ -110,6 +127,12 @@
               action="sevenseeds.pet_action_window"/>
     <menuitem name="Bases" id="sevenseeds.bases_list" parent="sevenseeds.game"
               action="sevenseeds.base_action_window"/>
+    <menuitem name="Routes" id="sevenseeds.route_list" parent="sevenseeds.game"
+              action="sevenseeds.route_action_window"/>
+    <menuitem name="Journey" id="sevenseeds.journey_list" parent="sevenseeds.game"
+              action="sevenseeds.journey_action_window"/>
+    <menuitem name="Events" id="sevenseeds.events_list" parent="sevenseeds.clients"
+              action="sevenseeds.events_action_window" />
     <!--
     <menuitem name="Server to list" id="sevenseeds" parent="sevenseeds.menu_2"
               action="sevenseeds.action_server"/>

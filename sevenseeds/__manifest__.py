@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [
@@ -34,6 +34,10 @@
         'demo/jobs.xml',
         'demo/weapons.xml',
         'demo/character_templates.xml',
+        'views/journey.xml',
+
+        'crons/crons.xml',
+
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data >
+        <record model="ir.cron" forcecreate="True" id="sevenseeds.cron_journey_update">
+            <field name="name">7Seeds: Cron Journey Update</field>
+            <field name="model_id" ref="model_sevenseeds_journey"/>
+            <field name="state">code</field>
+            <field name="code">model.update_travel()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="activity_user_type">specific</field>
+            <field name="doall" eval="False" />
+        </record>
+    </data>
+
+
+</odoo>

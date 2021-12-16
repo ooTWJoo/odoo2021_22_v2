@@ -23,6 +23,9 @@
         <record id="sevenseeds.a_forest" model="sevenseeds.area">
             <field name="name">Foamy Forest</field>
           </record>
+        <record id="sevenseeds.a_nut" model="sevenseeds.area">
+            <field name="name">Nuddy Nurr</field>
+          </record>
 
     </data>
 </odoo>
