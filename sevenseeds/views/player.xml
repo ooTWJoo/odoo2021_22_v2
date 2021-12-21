@@ -123,6 +123,16 @@
                 </form>
             </field>
         </record>
+        <record model="ir.ui.view" id="sevenseeds.player_search">
+      <field name="name">7Seeds Player search</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+          <search>
+              <field name="name" />
+              <filter name="player_partner" string="Is Player" domain="[('is_player','=',True)]"></filter>
+        </search>
+      </field>
+    </record>
 
 
     </data>

@@ -20,8 +20,12 @@
     <record model="ir.actions.act_window" id="sevenseeds.player_action_window">
       <field name="name">7 Seeds Players</field>
       <field name="res_model">res.partner</field>
-      <field name="view_mode">tree,form,kanban</field>
-      <field name="context">{'default_name': 'New Player'}</field>
+      <field name="view_mode">tree,form,kanban,search</field>
+      <field name="domain"></field>
+      <field name="context">{'default_name': 'New Player', 'default_is_player': True, 'search_default_player_partner': 1}</field>
+      <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('sevenseeds.player_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('sevenseeds.player_form')}),
+      (0, 0, {'view_mode': 'kanban', 'view_id': ref('sevenseeds.player_kanban')}),]"/>
+      <field name="search_view_id" ref="sevenseeds.player_search"/>
     </record>
     <record model="ir.actions.act_window" id="sevenseeds.character_action_window">
       <field name="name">Characters</field>
