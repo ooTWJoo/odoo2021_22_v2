@@ -19,7 +19,7 @@
 
     <record model="ir.actions.act_window" id="sevenseeds.player_action_window">
       <field name="name">7 Seeds Players</field>
-      <field name="res_model">sevenseeds.player</field>
+      <field name="res_model">res.partner</field>
       <field name="view_mode">tree,form,kanban</field>
       <field name="context">{'default_name': 'New Player'}</field>
     </record>

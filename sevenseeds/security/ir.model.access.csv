@@ -1,5 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sevenseeds_player,sevenseeds.player,model_sevenseeds_player,base.group_user,1,1,1,1
 access_sevenseeds_character,sevenseeds.character,model_sevenseeds_character,base.group_user,1,1,1,1
 access_sevenseeds_team,sevenseeds.team,model_sevenseeds_team,base.group_user,1,1,1,1
 access_sevenseeds_area,sevenseeds.area,model_sevenseeds_area,base.group_user,1,1,1,1

@@ -7,10 +7,10 @@ from odoo import models, fields, api
 from datetime import timedelta, datetime
 
 class player(models.Model):
-     _name = 'sevenseeds.player'
-     _description = 'Players'
+     _name = 'res.partner'
+     _description = 'res.partner'
 
-     name = fields.Char()
+     #name = fields.Char()
      team = fields.Many2one('sevenseeds.team', ondelete='set null')
      avatar = fields.Image(max_width=200, max_height=200)
      avatar_icon = fields.Image(related='avatar', max_width=50, max_height=50)
@@ -58,7 +58,7 @@ class team(models.Model):
      _description = 'Teams'
 
      name = fields.Char()
-     character = fields.One2many('sevenseeds.player', 'team')
+     character = fields.One2many('res.partner', 'team')
 
 class character(models.Model):
      _name = 'sevenseeds.character'
@@ -72,7 +72,7 @@ class character(models.Model):
      name = fields.Char()
      mood = fields.Float(default = 70.00)
      illness = fields.Float(default = _generate_illness)
-     player = fields.Many2one('sevenseeds.player', ondelete='set null')
+     player = fields.Many2one('res.partner', ondelete='set null')
      area = fields.Many2one('sevenseeds.area', ondelete='restrict')
      job = fields.Many2one('sevenseeds.job', ondelete='set null')
      weapon = fields.Many2one('sevenseeds.weapon', ondelete='set null')
@@ -224,7 +224,7 @@ class journey(models.Model):
     state = fields.Selection([('preparing', 'Preparing'), ('inprogress', 'In Progress'), ('finished', 'Finished')],
                              default='preparing')
 
-    player = fields.Many2one('sevenseeds.player')
+    player = fields.Many2one('res.partner')
     passengers = fields.Many2many('sevenseeds.character')
 
     @api.onchange('destination')
