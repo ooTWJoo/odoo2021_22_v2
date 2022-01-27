@@ -20,6 +20,14 @@ class player(models.Model):
      quantity_characters = fields.Integer(compute='_get_q_characters')
      login = fields.Char()
      password = fields.Char()
+     max_characters = fields.Integer(10)
+
+     @api.constrains('max_characters')
+     def _check_something(self):
+         for player in self:
+             if len(player.characters) > player.max_characters:
+                 raise ValidationError("Max 10 characters. Purchase more character slots to create another character.")
+
 
      @api.depends('characters')
      def _get_q_characters(self):
@@ -32,7 +40,7 @@ class player(models.Model):
                if sex == 'male':
                     first = ["Kenny", "Matt", "Nick", "Adam", "Brandon", "Luke", "Karl", "Micheal", "Tama", "Tanga",
                              "AJ", "Finn", "Jay", "Marty", "Chris", "Sammy", "Jake", "Santana", "Ortiz", "Darby",
-                             "Maxwell J.", "Jungle", "Evil", "Stu", "Colt", "John", "Alex", "Ten", "Alan V", "Brodie"]
+                             "Maxwell Jakob", "Jungle", "Evil", "Stu", "Colt", "John", "Alex", "Ten", "Alan V", "Brodie"]
                     second = ["Omega", "Jackson", "Page", "Cole", "Cutler", "Gallows", "Anderson", "Nakazawa",
                               "Tonga", "Loa", "Styles", "Bálor", "White", "Scurll", "Jericho", "Guevara", "Hager",
                               "Proud", "Powerful", "Allin", "Friedman", "Boy", "Uno", "Grayson", "Cabana", "Silver",
@@ -102,7 +110,7 @@ class character(models.Model):
           if self.sex == 'male':
                     first = ["Kenny", "Matt", "Nick", "Adam", "Brandon", "Luke", "Karl", "Micheal", "Tama", "Tanga",
                              "AJ", "Finn", "Jay", "Marty", "Chris", "Sammy", "Jake", "Santana", "Ortiz", "Darby",
-                             "Maxwell J.", "Jungle", "Evil", "Stu", "Colt", "John", "Alex", "Ten", "Alan V", "Brodie"]
+                             "Maxwell Jakob", "Jungle", "Evil", "Stu", "Colt", "John", "Alex", "Ten", "Alan V", "Brodie"]
                     second = ["Omega", "Jackson", "Page", "Cole", "Cutler", "Gallows", "Anderson", "Nakazawa",
                               "Tonga", "Loa", "Styles", "Bálor", "White", "Scurll", "Jericho", "Guevara", "Hager",
                               "Proud", "Powerful", "Allin", "Friedman", "Boy", "Uno", "Grayson", "Cabana", "Silver",
