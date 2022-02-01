@@ -20,7 +20,7 @@ class player(models.Model):
      quantity_characters = fields.Integer(compute='_get_q_characters')
      login = fields.Char()
      password = fields.Char()
-     max_characters = fields.Integer(10)
+     max_characters = fields.Integer(default=10)
 
      @api.constrains('max_characters')
      def _check_something(self):
@@ -33,6 +33,10 @@ class player(models.Model):
      def _get_q_characters(self):
           for p in self:
                p.quantity_characters = len(p.characters)
+
+     def apply_slots(self, addslots):
+         for p in self:
+             p.max_characters = p.max_characters + addslots
 
      def create_character(self):
           for p in self:
@@ -61,6 +65,8 @@ class player(models.Model):
 
                area = random.choice(self.env['sevenseeds.area'].search([]).mapped(lambda t: t.id))
                self.env['sevenseeds.character'].create({'player': p.id, 'sex': sex, 'name': name, 'template': template, 'area': area})
+
+
 
 
 class team(models.Model):
