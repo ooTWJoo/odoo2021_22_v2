@@ -41,5 +41,5 @@ class sale_premium(models.Model):
     def create(self, values):
         record = super(sale_premium, self).create(values)
         record.apply_premium()
-        return 
+        return
 
