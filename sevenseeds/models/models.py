@@ -34,12 +34,18 @@ class player(models.Model):
           for p in self:
                p.quantity_characters = len(p.characters)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f9b543845fa971bf56339da29b7d486047ac6ad2
      def apply_slots(self, addslots):
          for p in self:
              p.max_characters = p.max_characters + addslots
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f9b543845fa971bf56339da29b7d486047ac6ad2
      def create_character(self):
           for p in self:
                sex = random.choice(['male', 'female'])
