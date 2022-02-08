@@ -20,12 +20,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'sale'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'views/player.xml',
+        'views/survivor_slots.xml',
         'views/views.xml',
         'views/characters.xml',
         'demo/teams.xml',
