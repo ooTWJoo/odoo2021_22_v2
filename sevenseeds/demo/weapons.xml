@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
-
+<!-- -->
           <record id="sevenseeds.w_bow" model="sevenseeds.weapon">
             <field name="name">Bow</field>
           </record>
