@@ -20,32 +20,18 @@ class player(models.Model):
      quantity_characters = fields.Integer(compute='_get_q_characters')
      login = fields.Char()
      password = fields.Char()
-     max_characters = fields.Integer(default=10)
-
-     @api.constrains('characters')
-     def _check_something(self):
-         for player in self:
-             if player.quantity_characters >= player.max_characters:
-                 raise ValidationError("Max 10 characters. Purchase more character slots to create another character.")
-
+     max_characters = fields.Integer(default=5)
+     medicine_points = fields.Integer(default=100)
 
      @api.depends('characters')
      def _get_q_characters(self):
           for p in self:
                p.quantity_characters = len(p.characters)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f9b543845fa971bf56339da29b7d486047ac6ad2
      def apply_slots(self, addslots):
          for p in self:
              p.max_characters = p.max_characters + addslots
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f9b543845fa971bf56339da29b7d486047ac6ad2
      def create_character(self):
           for p in self:
                sex = random.choice(['male', 'female'])
@@ -59,7 +45,7 @@ class player(models.Model):
                               "Reynolds", "Ten", "Angels", "Lee", "Smegg"]
 
                     name = random.choice(first) + " " + random.choice(second)
-                    template = random.choice(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
+                    template = random.choice(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
                elif sex == 'female':
                     first = ["Kris", "AJ", "Anna", "Jade", "The", "Penelope", "Hikaru", "Ruby", "Charlotte", "Paige",
                              "Julia", "Alexa", "Brandi", "Britt", "Jamie", "Abadon", "Leva", "Leyla", "Nyla", "Serena",
@@ -69,7 +55,7 @@ class player(models.Model):
                               "Conti", "Rosa", "Banks", "Ivelisse", "Lynch", "Jax", "Moon", "Marie", "Wilson",
                               "McMahon"]
                     name = random.choice(first) + " " + random.choice(second)
-                    template = random.choice(['10','11', '12', '13', '14', '15', '16', '17', '18', '19'])
+                    template = random.choice(['11', '12', '13', '14', '15', '16', '17', '18', '19', '20'])
 
                area = random.choice(self.env['sevenseeds.area'].search([]).mapped(lambda t: t.id))
                self.env['sevenseeds.character'].create({'player': p.id, 'sex': sex, 'name': name, 'template': template, 'area': area})
@@ -108,13 +94,30 @@ class character(models.Model):
      state = fields.Selection(string="state", selection=[('draft', 'Draft'), ('confirm', 'Confirmed')], required=False, default="draft")
 
      def btn_draft(self):
-          self.state="draft"
+          self.state = "draft"
 
      def btn_confirm(self):
           self.state = "confirm"
 
+     def btn_heal(self):
+         for c in self:
+             if c.illness > 0:
+                 c.illness = 0
+             if c.player.medicine_points > 9:
+                 c.player.medicine_points - 10
+                 c.illness = 0
+             else:
+                 raise ValidationError("Not enough Medicine Points")
+
+     @api.constrains('player')
+     def _check_quantity_characters(self):
+         for character in self:
+             print(character.player.max_characters, character.player.quantity_characters)
+             if character.player.quantity_characters > character.player.max_characters:
+                raise ValidationError("Max " + str(character.player.max_characters) + " characters. Purchase more character slots to create another character.")
+
      @api.constrains('skill')
-     def _check_something(self):
+     def _check_skill_count(self):
           for character in self:
                if len(character.skill) > 3:
                     raise ValidationError("Max 3 Skills")
@@ -309,6 +312,69 @@ class event(models.Model):
     player = fields.Many2many('res.partner')
     event = fields.Reference([('sevenseeds.journey', 'Journey')])
     description = fields.Text()
+
+class wizard_pet(models.TransientModel):
+    _name = 'sevenseeds.wizard_pet'
+
+    def next(self):
+        if self.state=='1':
+            self.state='2'
+        elif self.state=='2':
+            self.state='3'
+        return {'type': 'ir.actions.act_window',
+                'res_model': self._name,
+                'res_id': self.id,
+                'view_mode': 'form',
+                'target': 'new',
+                }
+    def previous(self):
+        if (self.state=='3'):
+            self.state='2'
+        elif (self.state=='2'):
+            self.state='1'
+        return {'type': 'ir.actions.act_window',
+                'res_model': self._name,
+                'res_id': self.id,
+                'view_mode': 'form',
+                'target': 'new',
+                }
+
+    name = fields.Char()
+    type = fields.Selection([('dog', 'Dog'), ('cat', 'Cat'), ('bird', 'Bird'), ('horse', 'Horse'),
+                             ('fox', 'Fox'), ('monkey', 'Monkey')])
+    character = fields.Many2one('sevenseeds.character')
+    state = fields.Selection([('1', 'name'), ('2', 'type'), ('3', 'character')], default='1')
+
+    def btn_createpet(self):
+        pet = self.env['sevenseeds.pet'].create({'name': self.name, 'type': self.type, 'character': self.character.id})
+
+
+class wizard_medicine(models.TransientModel):
+
+
+    def _getPlayer(self):
+        return self.env['res.partner'].browse(self._context.get('active_id'))
+
+    def _getSick(self):
+        sickPeeps = self.env['res.partner'].browse(self._context.get('active_id')).characters
+        sickPeeps = sickPeeps.filtered(lambda i: i.illness > 0).ids
+        return sickPeeps
+
+
+
+    _name = 'sevenseeds.wizard_medicine'
+
+    player = fields.Many2one('res.partner', default=_getPlayer)
+    sickPeeps = fields.Many2many('sevenseeds.character', default=_getSick)
+    medicine_points = fields.Integer(related='player.medicine_points')
+
+
+
+
+
+
+
+
 
 
 

@@ -57,6 +57,7 @@
             <field name="arch" type="xml">
                 <form>
                         <header>
+                            <button name="%(wizard_medicine_action)d" type="action" string="Heal" class="oe_highlight"/>
                             <button name="create_character" type="object" string="Create A Character" class="oe_highlight"/>
                         </header>
                     <sheet>
@@ -132,6 +133,33 @@
               <filter name="player_partner" string="Is Player" domain="[('is_player','=',True)]"></filter>
         </search>
       </field>
+    </record>
+
+       <record model="ir.ui.view" id="wizard_medicine_form">
+      <field name="name">7Seeds medicine wizard form</field>
+      <field name="model">sevenseeds.wizard_medicine</field>
+      <field name="arch" type="xml">
+          <form>
+              <field name="medicine_points"/>
+              <field name="sickPeeps" mode="tree">
+                  <tree decoration-danger="illness>40">
+                      <field name="name"/>
+                      <field name="player"/>
+                      <field name="illness"/>
+                      <button name="btn_heal" type="object" string="Heal" class="oe_highlight"/>
+                  </tree>
+              </field>
+          </form>
+      </field>
+    </record>
+
+        <record model="ir.actions.act_window" id="wizard_medicine_action">
+          <field name="name">Heal Characters</field>
+          <field name="res_model">sevenseeds.wizard_medicine</field>
+          <field name="view_mode">form</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_id" ref="wizard_medicine_form"/>
+          <field name="target">new</field>
     </record>
 
 

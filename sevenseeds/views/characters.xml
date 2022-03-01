@@ -34,6 +34,9 @@
       <field name="arch" type="xml">
         <form>
             <header>
+
+                <button name="%(wizard_pet_action)d" string="Create Pet" type="action"/>
+
                 <button name="btn_draft" string="Draft" class="oe_highlight" states="confirm, cancel" type="object"/>
                 <button name="btn_confirm" string="Confirm" class="oe_highlight" states="draft" type="object"/>
                 <field name="state" widget="statusbar"/>
@@ -57,6 +60,13 @@
               <field name="illness" widget="percentpie"/>
                   </group>
             <notebook>
+            <page name="skill" string="Skills">
+                    <field name="skill">
+                    <tree>
+                      <field name="name"/>
+                  </tree>
+                    </field>
+                </page>
               <page name="base" string="Bases">
                 <field name="base">
                   <tree>
@@ -79,6 +89,44 @@
       </field>
     </record>
 
+      <record model="ir.ui.view" id="wizard_pet_form">
+      <field name="name">7Seeds pet wizard form</field>
+      <field name="model">sevenseeds.wizard_pet</field>
+      <field name="arch" type="xml">
+          <form>
+              <header>
+                  <button name="previous" type="object" string="Previous" class="btn btn-secondary" states="2,3"/>
+                  <button name="next" type="object" string="Next" class="btn oe_highlight" states="1,2"/>
+                  <field name="state" widget="statusbar"/>
+              </header>
+              <group states="1">
+                  <field name="name"/>
+
+              </group>
+              <group states="2">
+                  <field name="type"/>
+              </group>
+              <group states="3">
+                  <field name="character" />
+              </group>
+              <footer>
+                   <button name="btn_createpet" string="Create Pet" class="btn oe_highlight" type="object" states="3"/>
+              </footer>
+          </form>
+      </field>
+    </record>
+
+
+      <record model="ir.ui.view" id="sevenseeds.character_graph">
+      <field name="name">7Seeds character graph</field>
+      <field name="model">sevenseeds.character</field>
+      <field name="arch" type="xml">
+          <graph string="Sex Graph">
+              <field name="sex"/>
+        </graph>
+      </field>
+    </record>
+
         <record model="ir.ui.view" id="sevenseeds.character_kanban">
             <field name="name">7Seeds character kanban</field>
             <field name="model">sevenseeds.character</field>
@@ -92,6 +140,7 @@
                     <field name="area" />
                     <field name="player" />
                     <templates>
+
                         <t t-name="kanban-box">
 
                             <div t-attf-class="oe_kanban_color_{{kanban_getcolor(record.sex.raw_value)}} oe_kanban_card o_kanban_record_has_image_fill ">
@@ -133,6 +182,15 @@
               <filter name="group_by_area" string="Group By Area" context="{'group_by': 'area'}"></filter>
         </search>
       </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="wizard_pet_action">
+          <field name="name">Create Pets</field>
+          <field name="res_model">sevenseeds.wizard_pet</field>
+          <field name="view_mode">form</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_id" ref="wizard_pet_form"/>
+          <field name="target">new</field>
     </record>
 
   </data>
