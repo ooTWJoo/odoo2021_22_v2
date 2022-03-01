@@ -51,6 +51,33 @@
             </field>
         </record>
 
+      <record model="ir.ui.view" id="wizard_medicine_form">
+          <field name="name">7Seeds medicine wizard form</field>
+          <field name="model">sevenseeds.wizard_medicine</field>
+          <field name="arch" type="xml">
+              <form>
+                  <field name="medicine_points"/>
+                  <field name="sickPeeps" mode="tree">
+                      <tree decoration-danger="illness>40">
+                          <field name="name"/>
+                          <field name="player"/>
+                          <field name="illness"/>
+                          <button name="btn_heal" type="object" string="Heal" class="oe_highlight"/>
+                      </tree>
+                  </field>
+              </form>
+          </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="wizard_medicine_action">
+          <field name="name">Heal Characters</field>
+          <field name="res_model">sevenseeds.wizard_medicine</field>
+          <field name="view_mode">form</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_id" ref="wizard_medicine_form"/>
+          <field name="target">new</field>
+    </record>
+
         <record model="ir.ui.view" id="sevenseeds.player_form">
             <field name="name">7Seeds player form</field>
             <field name="model">res.partner</field>
@@ -135,32 +162,7 @@
       </field>
     </record>
 
-       <record model="ir.ui.view" id="wizard_medicine_form">
-      <field name="name">7Seeds medicine wizard form</field>
-      <field name="model">sevenseeds.wizard_medicine</field>
-      <field name="arch" type="xml">
-          <form>
-              <field name="medicine_points"/>
-              <field name="sickPeeps" mode="tree">
-                  <tree decoration-danger="illness>40">
-                      <field name="name"/>
-                      <field name="player"/>
-                      <field name="illness"/>
-                      <button name="btn_heal" type="object" string="Heal" class="oe_highlight"/>
-                  </tree>
-              </field>
-          </form>
-      </field>
-    </record>
 
-        <record model="ir.actions.act_window" id="wizard_medicine_action">
-          <field name="name">Heal Characters</field>
-          <field name="res_model">sevenseeds.wizard_medicine</field>
-          <field name="view_mode">form</field>
-          <field name="type">ir.actions.act_window</field>
-          <field name="view_id" ref="wizard_medicine_form"/>
-          <field name="target">new</field>
-    </record>
 
 
     </data>
